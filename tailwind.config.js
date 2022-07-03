@@ -16,7 +16,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      'sans': ['Roobert-Regular', 'ui-sans-serif', 'system-ui'],
+      'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
       'serif': ['ui-serif', 'Georgia'],
       'mono': ['ui-monospace', 'SFMono-Regular'],
     }
