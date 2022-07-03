@@ -5,7 +5,7 @@ import Chat from '../../components/app/Chat'
 import photo from '../../utils/img/profileMock.jpg'
 import { useApp } from '../../context/AppContext'
 
-const play = () => {
+const Play = () => {
   const { handleOpen } = useApp()
 
   return (
@@ -42,4 +42,4 @@ const play = () => {
   )
 }
 
-export default play
+export default Play
