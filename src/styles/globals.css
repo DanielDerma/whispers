@@ -3,6 +3,10 @@
   src: url(../utils//fonts//inter.ttf);
 }
 
+* {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -7,13 +7,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@twilio/conversations": "^2.1.0",
+    "flowbite": "^1.4.7",
+    "flowbite-react": "^0.1.0",
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "twilio": "^3.78.0"
   },
   "devDependencies": {
-    "@types/node": "17.0.35",
-    "@types/react": "18.0.9",
+    "@types/node": "^18.0.1",
+    "@types/react": "^18.0.14",
     "@types/react-dom": "18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
