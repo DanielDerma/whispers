@@ -2,14 +2,18 @@ import { useState } from "react";
 import Dots from "../../../utils/icons/Dots";
 import Eye from "../../../utils/icons/Eye";
 import EyeOff from "../../../utils/icons/EyeOff";
+import { useApp } from "../../../context/AppContext";
 
 const Admin = () => {
   const [eye, setEye] = useState(false);
+  const { activeConversation } = useApp();
 
   const password = "ab2s";
   return (
     <>
-      <p className="text-xl text-white font-bold ">Grupo del tec</p>
+      <p className="text-xl text-white font-bold ">
+        {activeConversation.uniqueName}
+      </p>
       <div className="flex p-1 pl-2 border-2 border-white rounded-full">
         {eye ? (
           <>

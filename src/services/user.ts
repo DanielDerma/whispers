@@ -1,4 +1,6 @@
-export const getAcessToken = async ({ token }: { token: string }) => {
+export const getAccessToken = async ({ token }: { token: string }) => {
+  console.log("entre token", token);
+
   const res = await fetch("/api/get-access-token", {
     headers: {
       jwt: token,
@@ -7,6 +9,6 @@ export const getAcessToken = async ({ token }: { token: string }) => {
 
   if (!res.ok) throw new Error("Error getting acess token");
 
-  const { acessToken } = await res.json();
-  return acessToken;
+  const { accessToken } = await res.json();
+  return accessToken;
 };

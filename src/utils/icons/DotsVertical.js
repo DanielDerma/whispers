@@ -1,6 +1,6 @@
 import React from "react";
 
-const Leave = () => {
+const DotsVertical = () => {
   return (
     <svg
       className="w-6 h-6"
@@ -13,10 +13,10 @@ const Leave = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+        d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
       />
     </svg>
   );
 };
 
-export default Leave;
+export default DotsVertical;

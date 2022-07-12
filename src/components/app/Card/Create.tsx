@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { useApp } from "../../../context/AppContext";
+import { createOrJoinConversation } from "../../../services/chat";
+import { getAccessToken } from "../../../services/user";
 
-const Create = ({ handleTypeOfRole }) => {
-  const [create, setCreate] = useState(true);
-  const { handleOpen } = useApp();
+const Create = () => {
+  const [create, setCreate] = useState<boolean>(true);
+  const [room, setRoom] = useState("");
 
-  const handleClick = (value) => {
+  const { handleOpen, user, handleActiveConversation } = useApp();
+
+  const handleClick = (value: any) => {
     setCreate(value);
   };
 
-  const handleEntrar = () => {
-    handleOpen();
-    handleTypeOfRole(create);
+  const handleEntrar = async () => {
+    const accessToken = await getAccessToken({ token: user.token });
+    const conversation = await createOrJoinConversation({ room, accessToken });
+
+    if (conversation) {
+      handleOpen();
+      handleActiveConversation(conversation);
+    }
   };
 
   return (
@@ -35,6 +44,8 @@ const Create = ({ handleTypeOfRole }) => {
         type="text"
         placeholder={`${create ? "Nombre del canal" : "Codigo"}`}
         className="w-4/5 bg-white py-1 rounded-full text-center placeholder:text-gray-500"
+        value={room}
+        onChange={(e) => setRoom(e.target.value)}
       />
       <button
         onClick={handleEntrar}
