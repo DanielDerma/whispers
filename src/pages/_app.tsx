@@ -5,7 +5,7 @@ import AppContext from "../context/AppContext";
 import type { ReactElement, ReactNode } from "react";
 
 export type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
+  getLayout?: (page: ReactElement) => ReactElement;
 };
 
 type AppPropsWithLayout = AppProps & {
