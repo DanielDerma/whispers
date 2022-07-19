@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/serviceSupabase";
 import { Session } from "@supabase/supabase-js";
 import { getAccessToken } from "../services/user";
+import { Conversation } from "@twilio/conversations";
 
 type Context = {
   session: Session | null;
@@ -21,7 +22,8 @@ export function useApp() {
 }
 
 const AppProvider = ({ children }: { children: JSX.Element }) => {
-  const [activeConversation, setActiveConversation] = useState();
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [activeConversation, setActiveConversation] = useState<Conversation>();
   const [loading, setLoading] = useState<boolean>(true);
   const [url, setUrl] = useState<string>("");
   const [session, setSession] = useState<Session | null>(null);
@@ -58,7 +60,8 @@ const AppProvider = ({ children }: { children: JSX.Element }) => {
       const { error, data } = await supabase.from("profiles").insert({
         id,
         sid,
-        username: "",
+        username: session.user?.user_metadata?.name,
+        email: session.user?.email,
         avatar_url: "https://joeschmoe.io/api/v1/josephine",
       });
       if (error) throw error;

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useApp } from "../../../context/AppContext";
 import { createOrJoinConversation } from "../../../services/chat";
@@ -5,6 +6,7 @@ import { getAccessToken } from "../../../services/user";
 import { supabase } from "../../../utils/serviceSupabase";
 
 const Create = () => {
+  const router = useRouter();
   const [create, setCreate] = useState<boolean>(true);
   const [room, setRoom] = useState("");
   const { infoUser, session } = useApp();
@@ -26,13 +28,24 @@ const Create = () => {
     const { accessToken } = await getAccessToken({
       token: session?.access_token,
     });
+
     const conversation = await createOrJoinConversation({ room, accessToken });
-    if (conversation) {
-      // supabase database table channels insert 
-      await supabase.from("channels").insert({
-        
-      })
+
+    if (!conversation) return;
+    try {
+      // supabase database table channels insert
+      const { error } = await supabase.from("channels").insert({
+        sid: infoUser.sid,
+        room,
+        isAdmin: true,
+      });
+
+      if (error) throw error;
+
       handleActiveConversation(conversation);
+      router.push(`/app/chat/${room}`);
+    } catch (error) {
+      console.log(error);
     }
   };
 

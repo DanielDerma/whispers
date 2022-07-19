@@ -7,12 +7,12 @@ import LogoutBtn from "./buttons/LogoutBtn";
 import SaveBtn from "./buttons/SaveBtn";
 
 const Profile = () => {
-  const { showProfile, updateProfile, session, url: urlCtx } = useApp();
+  const { showProfile, updateProfile, session } = useApp();
   const [url, setUrl] = useState<string>("");
   const [displayUrl, setDisplayUrl] = useState(url);
 
   useEffect(() => {
-    if (session && urlCtx) {
+    if (session) {
       showProfile().then((elem: string) => {
         setUrl(elem);
         setDisplayUrl(elem);
