@@ -54,12 +54,8 @@ const AppProvider = ({ children }: { children: JSX.Element }) => {
       // supabase create profile
       if (!session) return;
 
-      const { sid } = await getAccessToken({
-        token: session?.access_token,
-      });
       const { error, data } = await supabase.from("profiles").insert({
         id,
-        sid,
         username: session.user?.user_metadata?.name,
         email: session.user?.email,
         avatar_url: "https://joeschmoe.io/api/v1/josephine",

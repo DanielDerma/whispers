@@ -45,12 +45,9 @@ const index = async (req: NextApiRequest, res: NextApiResponse) => {
 
       accessToken.addGrant(conversationsGrant);
 
-      res
-        .status(200)
-        .json({
-          accessToken: accessToken.toJwt(),
-          sid: accessToken.accountSid,
-        });
+      res.status(200).json({
+        accessToken: accessToken.toJwt(),
+      });
     } else {
       res.status(500).json({ error: "500" });
     }
