@@ -1,24 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useApp } from "../../../context/AppContext";
 import { createOrJoinConversation } from "../../../services/chat";
 import { getAccessToken } from "../../../services/user";
+import { supabase } from "../../../utils/serviceSupabase";
 
 const Create = () => {
   const [create, setCreate] = useState<boolean>(true);
   const [room, setRoom] = useState("");
+  const { infoUser, session } = useApp();
 
-  const { handleOpen, user, handleActiveConversation } = useApp();
+  useEffect(() => {
+    setRoom("");
+  }, [create]);
+
+  const { handleActiveConversation } = useApp();
 
   const handleClick = (value: any) => {
     setCreate(value);
   };
 
   const handleEntrar = async () => {
-    const accessToken = await getAccessToken({ token: user.token });
-    const conversation = await createOrJoinConversation({ room, accessToken });
+    if (!infoUser) return;
+    if (!session) return;
 
+    const { accessToken } = await getAccessToken({
+      token: session?.access_token,
+    });
+    const conversation = await createOrJoinConversation({ room, accessToken });
     if (conversation) {
-      handleOpen();
+      // supabase database table channels insert 
+      await supabase.from("channels").insert({
+        
+      })
       handleActiveConversation(conversation);
     }
   };
@@ -40,6 +53,11 @@ const Create = () => {
           Join
         </button>
       </p>
+      {!create && (
+        <p className="text-white">
+          Asegurate de checar el email, si no tienes invitacion no entras
+        </p>
+      )}
       <input
         type="text"
         placeholder={`${create ? "Nombre del canal" : "Codigo"}`}

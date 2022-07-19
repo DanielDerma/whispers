@@ -1,29 +1,13 @@
 import type { NextPage } from "next";
 import Portal from "../components/Portal";
-import Account from "../components/Account";
-import { useEffect, useState } from "react";
-import { supabase } from "../utils/serviceSupabase";
-import { Session } from "@supabase/supabase-js";
+import useAuth from "../hooks/useAuth";
 
 const Home: NextPage = () => {
-  const [session, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    setSession(supabase.auth.session());
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
-  console.log(session);
+  useAuth({ ref: "/play" });
 
   return (
     <div className="">
-      {!session ? (
-        <Portal />
-      ) : (
-        <Account key={session?.user?.id} session={session} />
-      )}
+      <Portal />
     </div>
   );
 };

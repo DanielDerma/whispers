@@ -1,8 +1,11 @@
 import { useRouter } from "next/router";
+import useAuth from "../../../hooks/useAuth";
 
 const Room = () => {
   const router = useRouter();
   const { room } = router.query;
+
+  useAuth({ ref: `/chat/${room}` });
 
   const me = "daniel";
 

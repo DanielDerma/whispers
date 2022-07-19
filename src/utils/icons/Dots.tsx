@@ -1,4 +1,4 @@
-const SvgComponent = (props) => (
+const SvgComponent = (props: any) => (
   <svg
     className="w-6 h-6"
     fill="white"

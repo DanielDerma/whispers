@@ -4,7 +4,6 @@ import { supabase } from "../utils/serviceSupabase";
 const Account = ({ session }: { session: any }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState<string | null>(null);
-  const [website, setWebsite] = useState<string | null>(null);
   const [avatar_url, setAvatar_url] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const Account = ({ session }: { session: any }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, avatar_url`)
+        .select(`username, avatar_url`)
         .eq("id", user?.id)
         .single();
 
@@ -29,7 +28,6 @@ const Account = ({ session }: { session: any }) => {
 
       if (data) {
         setUsername(data.username);
-        setWebsite(data.website);
         setAvatar_url(data.avatar_url);
       }
     } catch (error: any) {
@@ -41,11 +39,9 @@ const Account = ({ session }: { session: any }) => {
 
   async function updateProfile({
     username,
-    website,
     avatar_url,
   }: {
     username: string | null;
-    website: string | null;
     avatar_url: string | null;
   }) {
     try {
@@ -56,7 +52,6 @@ const Account = ({ session }: { session: any }) => {
       const updates = {
         id: user?.id,
         username,
-        website,
         avatar_url,
         updated_at: new Date(),
       };
@@ -90,20 +85,11 @@ const Account = ({ session }: { session: any }) => {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="website"
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
 
       <div>
         <button
           className="button block primary"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          onClick={() => updateProfile({ username, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
