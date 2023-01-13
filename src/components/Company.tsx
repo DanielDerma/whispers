@@ -8,7 +8,7 @@ const Company = () => {
       <div className="flex flex-col">
         <p>Whispers</p>
         <p>
-          Made by{" "}
+          Made by
           <b>
             <a
               href="https://github.com/danielderma"
