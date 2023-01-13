@@ -5,10 +5,6 @@ const withPWA = require("next-pwa")({
   skipWaiting: true,
 });
 
-const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-};
+const nextConfig = withPWA({});
 
 module.exports = nextConfig;
