@@ -7,6 +7,9 @@ export default function Head() {
       <link rel="icon" href="/favicon.ico" />
 
       {/* pwa */}
+      <link rel="manifest" href="/manifest.json" />
+      <link rel="apple-touch-icon" href="/whispers.png"></link>
+      <meta name="theme-color" content="#fff" />
     </>
   );
 }
