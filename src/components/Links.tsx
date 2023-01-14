@@ -10,7 +10,7 @@ const Links = () => {
         rel="noreferrer"
         className="flex items-center space-x-2"
       >
-        <Github className="w-5 h-5" />
+        <Github className="h-5 w-5" />
         <p>View in Github</p>
       </a>
       <a
@@ -19,7 +19,7 @@ const Links = () => {
         rel="noreferrer"
         className="flex items-center space-x-2"
       >
-        <Twitter className="w-5 h-5" />
+        <Twitter className="h-5 w-5" />
         <p>Share</p>
       </a>
     </div>

@@ -5,11 +5,11 @@ import QR from "@/components/QR";
 
 export default function Home() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="flex h-screen w-screen items-center justify-center">
       <Links />
       <Company />
       <QR />
-      <section className="w-screen h-screen bg-black md:w-[550px] md:h-5/6 z-10">
+      <section className="relative z-10 h-screen w-screen border-2 border-black md:h-5/6 md:w-[550px]">
         <App />
       </section>
     </div>
