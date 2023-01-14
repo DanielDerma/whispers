@@ -5,6 +5,17 @@ const withPWA = require("next-pwa")({
   skipWaiting: true,
 });
 
-const nextConfig = withPWA({});
+const nextConfig = withPWA({
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatar.vercel.sh",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+});
 
 module.exports = nextConfig;
