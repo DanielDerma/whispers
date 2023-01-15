@@ -9,7 +9,7 @@ const Company = () => {
         <p>Whispers</p>
         <p>
           Made by
-          <b>
+          <b className="ml-1">
             <a
               href="https://github.com/danielderma"
               target="_blank"

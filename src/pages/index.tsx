@@ -16,7 +16,7 @@ export default function Home() {
       <Links />
       <Company />
       <QR />
-      <section className="relative z-10 h-screen w-screen rounded-lg bg-white ring-1 ring-gray-900/5 md:h-5/6 md:w-[550px] md:shadow-2xl">
+      <section className="z-10 h-screen w-screen rounded-lg bg-white ring-1 ring-gray-900/5 md:h-[85%] md:max-w-[500px] md:shadow-2xl">
         <App />
       </section>
     </div>
