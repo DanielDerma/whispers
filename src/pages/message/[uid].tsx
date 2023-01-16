@@ -83,7 +83,7 @@ const Settings = () => {
 
   return (
     <div className=" h-full">
-      <header className="mx-10 flex h-16  items-center justify-between">
+      <header className="mx-5 flex h-16  items-center justify-between">
         <div className="flex items-center gap-x-2">
           <Link href="/">
             <div className="grid h-8 w-8 place-content-center items-center">
@@ -111,7 +111,7 @@ const Settings = () => {
       </header>
       <section
         ref={chatScroll}
-        className="flex max-h-[calc(100%_-_64px)] flex-col overflow-y-auto px-10"
+        className="flex max-h-[calc(100%_-_64px)] flex-col overflow-y-auto px-5"
       >
         {LIST.map((elem) => (
           <Message
