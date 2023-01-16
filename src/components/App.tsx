@@ -1,5 +1,5 @@
 import Contact from "./Contact";
-import Plus from "@/utils/icons/Plus";
+import Modal from "./Modal";
 
 const App = () => {
   return (
@@ -10,13 +10,7 @@ const App = () => {
           <Contact key={i} lastMessage="Hello, how are you?" name="Cesar" />
         ))}
       </section>
-      <div className="absolute bottom-0 z-50 flex h-8 w-full justify-center border-t-2 border-black bg-white">
-        <div className="relative bottom-6 grid h-10 w-10 place-content-center rounded-full bg-[#ff5858] p-6">
-          <div className="grid place-content-center rounded-full bg-white">
-            <Plus className="h-6 w-6 text-[#ff5858]" />
-          </div>
-        </div>
-      </div>
+      <Modal />
     </div>
   );
 };
