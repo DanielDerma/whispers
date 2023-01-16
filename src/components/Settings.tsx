@@ -4,7 +4,7 @@ import More from "@/utils/icons/More";
 
 export default function Example() {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative z-50 inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center rounded-md bg-inherit bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           <More className="h-5 w-5 text-black " aria-hidden="true" />

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Message from "@/components/Message";
+import { useEffect, useRef } from "react";
 
 const LIST = [
   {
@@ -11,33 +12,61 @@ const LIST = [
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     sender: "@daniel",
-    time: "12:00",
+    time: new Date(),
   },
   {
     id: 2,
     content: "Lorem ipsum dolor sit amet. Lorem, ipsum dolor.",
     sender: "@nina",
-    time: "12:05",
+    time: new Date(),
   },
   {
     id: 3,
     content:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit labore facilis quo!",
     sender: "@nina",
-    time: "12:07",
+    time: new Date(),
   },
   {
     id: 4,
     content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum.",
     sender: "@daniel",
-    time: "12:27",
+    time: new Date(),
   },
   {
     id: 5,
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, quod?",
     sender: "@nina",
-    time: "12:29",
+    time: new Date(),
+  },
+  {
+    id: 6,
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, quod?",
+    sender: "@nina",
+    time: new Date(),
+  },
+  {
+    id: 7,
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, quod?",
+    sender: "@nina",
+    time: new Date(),
+  },
+  {
+    id: 8,
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, quod?",
+    sender: "@nina",
+    time: new Date(),
+  },
+  {
+    id: 9,
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, quod?",
+    sender: "@daniel",
+    time: new Date(),
   },
 ];
 
@@ -45,10 +74,16 @@ const ME = "@daniel";
 
 const Settings = () => {
   const router = useRouter();
+  const chatScroll = useRef<HTMLDivElement>(null);
   const { uid } = router.query;
+
+  useEffect(() => {
+    chatScroll.current?.scrollTo(0, chatScroll.current.scrollHeight);
+  }, []);
+
   return (
-    <div>
-      <header className="mx-4 flex h-16  items-center justify-between">
+    <div className=" h-full">
+      <header className="mx-10 flex h-16  items-center justify-between">
         <div className="flex items-center gap-x-2">
           <Link href="/">
             <div className="grid h-8 w-8 place-content-center items-center">
@@ -74,7 +109,10 @@ const Settings = () => {
         </div>
         <SettingsButton />
       </header>
-      <section className="w-full">
+      <section
+        ref={chatScroll}
+        className="flex max-h-[calc(100%_-_64px)] flex-col overflow-y-auto px-10"
+      >
         {LIST.map((elem) => (
           <Message
             key={elem.id}
