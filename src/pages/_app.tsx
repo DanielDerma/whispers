@@ -1,6 +1,6 @@
+import "@/styles/globals.css";
 import { AppProps } from "next/app";
 import { Montserrat } from "@next/font/google";
-import "@/styles/globals.css";
 
 import bg from "public/bg.jpg";
 import Company from "@/components/Company";
@@ -8,14 +8,9 @@ import Links from "@/components/Links";
 import QR from "@/components/QR";
 import Image from "next/image";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-});
-
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${montserrat.variable} overflow-hidden font-sans`}>
+    <main className={`overflow-hidden font-sans`}>
       <div className="flex h-screen w-screen items-center justify-center overflow-hidden">
         <Image
           src={bg}
