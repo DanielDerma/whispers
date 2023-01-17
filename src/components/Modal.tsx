@@ -1,16 +1,32 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import Plus from "@/utils/icons/Plus";
+import Copy from "@/utils/icons/Copy";
 
 export default function MyModal() {
   let [isOpen, setIsOpen] = useState(false);
+  const [isAdd, setIsAdd] = useState(false);
+  const [isCpy, setIsCpy] = useState(false);
 
   function closeModal() {
+    setIsAdd(false);
+    setIsCpy(false);
     setIsOpen(false);
   }
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function hadleCreateRoom(e: any) {
+    e.preventDefault();
+    console.log(e.target[0].value);
+    setIsAdd(true);
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText("https://whispers.vercel.app/");
+    setIsCpy(true);
   }
 
   return (
@@ -56,24 +72,60 @@ export default function MyModal() {
                     as="h3"
                     className="text-lg leading-6 text-gray-900"
                   >
-                    Payment successful
+                    {isAdd ? "Room created" : "Create a room"}
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
+                  {isAdd ? (
+                    <>
+                      <div className="mt-2">
+                        <p className="text-sm text-gray-500">
+                          Your room has been created. You can now invite your
+                          friends with the link below.
+                        </p>
+                        <div className="my-2 flex items-center gap-x-2">
+                          <p className="text-sm text-[#49beb7]">
+                            www.google.com
+                          </p>
+                          <button onClick={copyLink}>
+                            <Copy />
+                          </button>
+                          {isCpy && (
+                            <p className="text-sm text-green-400">Copied!</p>
+                          )}
+                        </div>
+                      </div>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModal}
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <form onSubmit={hadleCreateRoom}>
+                      <div className="mt-2">
+                        <input
+                          type="search"
+                          id="default-search"
+                          className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                          placeholder="Name of the room"
+                          required
+                        />
+                      </div>
+
+                      <div className="mt-4 text-right">
+                        <button
+                          type="submit"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </form>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
