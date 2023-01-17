@@ -1,13 +1,26 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { SupabaseClient } from "@supabase/supabase-js";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Contact from "./Contact";
 import Modal from "./Modal";
 
 const App = () => {
   const supabaseClient = useSupabaseClient();
+  const user = useUser()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/auth')
+    }
+  }, [user]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleLogOut = () => {
     supabaseClient.auth.signOut();
   };
+
+  console.log(user)
   return (
     <div className="relative h-full overflow-hidden pt-6">
       <div className="">

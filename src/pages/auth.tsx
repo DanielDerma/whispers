@@ -1,12 +1,24 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import Image from "next/image";
 import logo from "public/whispers.png";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 export default function Home() {
+  const supabaseClient = useSupabaseClient();
+  const user = useUser()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (user) {
+      router.push('/')
+    }
+  }, [user]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className="mx-4 my-20">
       <header className="flex items-center justify-center">
@@ -14,7 +26,7 @@ export default function Home() {
         <p>Whispers</p>
       </header>
       <Auth
-        redirectTo="http://localhost:3000/"
+        redirectTo="https://whispers-three.vercel.app/auth"
         supabaseClient={supabaseClient}
         appearance={{ theme: ThemeSupa }}
         providers={["google"]}
@@ -42,8 +54,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   return {
     props: {
-      initialSession: session,
-      user: session.user,
+      ok: true,
     },
   };
 };
