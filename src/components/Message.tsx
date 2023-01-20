@@ -7,14 +7,11 @@ const Message = ({
   id: number;
   content: string;
   sender: string;
-  time: Date;
+  time: string;
 }) => {
   const isMe = sender === "@daniel";
 
-  const timeString = time.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-  });
+  const timeString = time
 
   if (isMe) {
     return (
