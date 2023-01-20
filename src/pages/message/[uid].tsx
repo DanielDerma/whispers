@@ -1,15 +1,14 @@
-import LeftArrow from "@/utils/icons/LeftArrow";
-import Emojin from "@/utils/icons/Emojin";
-import Send from "@/utils/icons/Send";
-import Micro from "@/utils/icons/Micro";
-import SettingsButton from "@/components/Settings";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import Link from "next/link";
 import Message from "@/components/Message";
-import { useEffect, useRef, useState } from "react";
-import { GetServerSidePropsContext } from "next";
+import SettingsButton from "@/components/Settings";
+import LeftArrow from "@/utils/icons/LeftArrow";
+import Micro from "@/utils/icons/Micro";
+import Send from "@/utils/icons/Send";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSidePropsContext } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 
 const LIST = [
   {
@@ -122,7 +121,6 @@ const Settings = () => {
       </section>
       <div className="absolute bottom-0 z-50 h-20 w-full flex justify-center bg-white items-center">
         <div className="w-5/6 h-16 border-2 border-black rounded-3xl px-6 gap-x-3 flex items-center">
-          <Emojin />
           <input
             type="search"
             className="block w-full rounded-lg bg-gray-50 p-4 text-sm text-gray-900 focus:outline-none"
