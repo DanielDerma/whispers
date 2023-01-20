@@ -1,10 +1,15 @@
 import LeftArrow from "@/utils/icons/LeftArrow";
+import Emojin from "@/utils/icons/Emojin";
+import Send from "@/utils/icons/Send";
+import Micro from "@/utils/icons/Micro";
 import SettingsButton from "@/components/Settings";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Message from "@/components/Message";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { GetServerSidePropsContext } from "next";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 const LIST = [
   {
@@ -74,6 +79,7 @@ const ME = "@daniel";
 
 const Settings = () => {
   const router = useRouter();
+  const [input, setInput] = useState("")
   const chatScroll = useRef<HTMLDivElement>(null);
   const { uid } = router.query;
 
@@ -82,7 +88,7 @@ const Settings = () => {
   }, []);
 
   return (
-    <div className=" h-full">
+    <div className="relative h-full">
       <header className="mx-5 flex h-16  items-center justify-between">
         <div className="flex items-center gap-x-2">
           <Link href="/">
@@ -111,7 +117,7 @@ const Settings = () => {
       </header>
       <section
         ref={chatScroll}
-        className="flex max-h-[calc(100%_-_64px)] flex-col overflow-y-auto px-5"
+        className="flex max-h-[calc(100%_-_64px)] flex-col overflow-y-auto px-5 pb-28"
       >
         {LIST.map((elem) => (
           <Message
@@ -123,8 +129,48 @@ const Settings = () => {
           />
         ))}
       </section>
+      <div className="absolute bottom-0 z-50 h-20 w-full flex justify-center bg-white items-center">
+        <div className="w-5/6 h-16 border-2 border-black rounded-3xl px-6 gap-x-3 flex items-center">
+          <Emojin />
+          <input
+            type="text"
+            className="block w-full rounded-lg bg-gray-50 p-4 text-sm text-gray-900 focus:outline-none"
+            placeholder="Name of the room"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          {
+            input === "" ? <Micro /> : <Send />
+          }
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Settings;
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  // Create authenticated Supabase Client
+  const supabase = createServerSupabaseClient(ctx);
+  // Check if we have a session
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user
+    }
+  };
+};
+
